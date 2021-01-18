@@ -8,6 +8,7 @@ const path = require('path');
 const bodyParser = require('body-parser'); 
 
 const Auth = require('./src/shared/interfaces/routes/Auth');
+const Project = require('./src/projects/interfaces/routes/Project');
 
 const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
@@ -17,7 +18,7 @@ if (!databaseUri) {
 
 const api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/shared/infraestucture/cloud/main.js',
+  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/src/shared/infraestucture/cloud/main.js',
   appId: process.env.APP_ID || 'myAppId',
   masterKey: process.env.MASTER_KEY || 'myMasterKey', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
@@ -71,6 +72,7 @@ app.get('/test', function(req, res) {
 
 //Routes
 app.use('/', Auth);
+app.use('/projects', Project);
 
 const port = process.env.PORT || 1337;
 
