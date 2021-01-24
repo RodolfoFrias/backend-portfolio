@@ -3,7 +3,11 @@
 module.exports = class {
 
     getProjects(domainAuth){
-        throw new Error('ERR_METHOD_findAllProjects_NOT_IMPLEMENTED');
+        throw new Error('ERR_METHOD_getProjects_NOT_IMPLEMENTED');
+    }
+
+    getProject(domainAuth, project){
+        throw new Error('ERR_METHOD_getProject_NOT_IMPLEMENTED');
     }
 
 }
