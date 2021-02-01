@@ -20,7 +20,8 @@ let appName = 'backend-portfolio';
 let user = 'admin';
 let pass = 'cliente';
 
-if(process.env.ENV == 'production'){
+if(process.env.ENV === 'production'){
+  console.log('Mode production ON');
   databaseUri = process.env.MONGODB_URI;
   appId = process.env.APP_ID;
   masterKey = process.env.MASTER_KEY;
