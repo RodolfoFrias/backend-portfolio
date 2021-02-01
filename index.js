@@ -13,9 +13,21 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 let databaseUri = 'mongodb://localhost:27017/dev';
+let appId = 'myAppId';
+let masterKey = 'myMasterKey';
+let serveURL = 'http://localhost:1337/parse';
+let appName = 'backend-portfolio';
+let user = 'admin';
+let pass = 'cliente';
 
-if(process.env.ENV == 'development'){
+if(process.env.ENV == 'production'){
   databaseUri = process.env.MONGODB_URI;
+  appId = process.env.APP_ID;
+  masterKey = process.env.MASTER_KEY;
+  serveURL = process.env.SERVER_URL;
+  appName = process.env.APP_NAME;
+  user = process.env.USERNAME;
+  pass = process.env.PASSWORD;
 }
 
 if (!databaseUri) {
@@ -25,9 +37,9 @@ if (!databaseUri) {
 const api = new ParseServer({
   databaseURI: databaseUri,
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/src/shared/infraestucture/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || 'myMasterKey', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+  appId: appId,
+  masterKey: masterKey, //Add your master key here. Keep it secret!
+  serverURL: serveURL,  // Don't forget to change to https if needed
   // liveQuery: {
   //   classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   // }
@@ -39,16 +51,16 @@ const trustProxy = true;
 const dashboard = new ParseDashboard({
   "apps":[
     {
-      "serverURL": 'http://localhost:1337/parse',
-      "appId":'myAppId',
-      "masterKey":'myMasterKey',
-      "appName":'backend-portfolio'
+      "serverURL": serveURL,
+      "appId": appId,
+      "masterKey": masterKey,
+      "appName": appName
     }
   ],
   "users":[
     {
-      "user":'admin',
-      "pass":'cliente'
+      "user": user,
+      "pass": pass
     }
   ]
 }, { 
@@ -85,8 +97,9 @@ app.get('/test', function(req, res) {
 });
 
 //Routes
-app.use('/', Auth);
-app.use('/projects', Project);
+const PREFIX = '/api/v1';
+app.use(PREFIX, Auth);
+app.use(PREFIX+'/projects', Project);
 
 const port = process.env.PORT || 1337;
 
