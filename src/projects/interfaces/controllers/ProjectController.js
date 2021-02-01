@@ -9,7 +9,9 @@ module.exports = {
 
     async getProjects(req, res, next) {
         try {
+            console.log('Projects endpoint');
             const projects = await FindAll(new ProjectRepository(Project));
+            console.log('Projects: ', projects);
             res.status(200).json(projects);
         } catch (error) {
             console.log(error);
@@ -19,8 +21,10 @@ module.exports = {
 
     async getProject(req, res, next) {
         try {
+            console.log('Project endpoint');
             const { id } = req.params;
             const project = await Find(new ProjectRepository(Project), id);
+            console.log('Project:', project);
             res.status(200).json(project);
         } catch (error) {
             console.log(error);
