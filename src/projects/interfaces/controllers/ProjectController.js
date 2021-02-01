@@ -19,7 +19,6 @@ module.exports = {
 
     async getProject(req, res, next) {
         try {
-            console.log('Entra')
             const { id } = req.params;
             const project = await Find(new ProjectRepository(Project), id);
             res.status(200).json(project);
