@@ -102,6 +102,8 @@ const PREFIX = '/api/v1';
 app.use(PREFIX, Auth);
 app.use(PREFIX+'/projects', Project);
 
+app.use(require('./src/shared/interfaces/middlewares/error.middleware'))
+
 const port = process.env.PORT || 1337;
 
 app.listen(port, function() {
