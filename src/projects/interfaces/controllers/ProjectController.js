@@ -1,5 +1,3 @@
-'use strict';
-
 const Project = Parse.Object.extend('Project');
 const FindAll = require('../../application/use_cases/FindAll');
 const Find = require('../../application/use_cases/Find');

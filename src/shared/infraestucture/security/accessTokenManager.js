@@ -1,5 +1,3 @@
-'use strict';
-
 const jwt = require('jsonwebtoken');
 
 const AccessTokenManager = require('../../application/security/accessTokenManager');

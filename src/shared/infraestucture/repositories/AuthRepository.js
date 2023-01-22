@@ -1,5 +1,3 @@
-'use strict';
-
 const User = Parse.Object.extend('User');
 const AuthRepository = require('../../domain/AuthRepository');
 

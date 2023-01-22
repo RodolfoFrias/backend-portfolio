@@ -1,5 +1,1 @@
-'use strict';
-
-module.exports = (projectRepository) => {
-    return projectRepository.getProjects();
-}
+module.exports = (projectRepository) => projectRepository.getProjects()

@@ -1,5 +1,3 @@
-'use strict';
-
 moodule.exports = class {
 
     generate(){

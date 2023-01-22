@@ -11,13 +11,13 @@ module.exports = class extends ProjectRepository {
 
     async getProjects(){
         const projectQuery = this.model;
-        return await projectQuery.find();
+        return projectQuery.find();
     }
 
     async getProject(id){
         const projectQuery = this.model;
         projectQuery.equalTo('objectId', id);
-        return await projectQuery.first();
+        return projectQuery.first();
     }
 
 }
